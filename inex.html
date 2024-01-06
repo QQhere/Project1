@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label {
+            margin: 20px;
+        }
+
+        button {
+            background-color: #2e9a32;
+            border-radius: 10px;
+            border: none;
+            color: white;
+            margin: 3px 20px;
+            text-align: center;
+            font-size: 14px;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .area {
+            min-height: 15vw;
+            height: auto;
+            width: 70%;
+            margin-left: 10px;
+            padding-left: 10px;
+        }
+    </style>
+    <script src="./Week 2/generatePermutations.js"></script>
+</head>
+
+<body>
+    <form id="myForm" onsubmit="myFunction()">
+        <label for="multiline">Nhập dữ liệu:</label><br>
+        <textarea class="area" id="multiline" name="multiline"></textarea>
+        <br>
+        <button id="submit" type="submit">Submit</button>
+    </form>
+    <div>
+        <label for="multiline">Input:</label><br>
+        <div class="area" id="input" style="border: no;"></div>
+        <label for="multiline">Output:</label><br>
+        <div class="area" id="output" style="border: 1px solid #2e9a32;"></div>
+    </div>
+    <script>
+        let textinput;
+        function myFunction() {
+            textinput = document.getElementById("multiline").value;
+            localStorage.setItem("input", textinput);
+            localStorage.setItem("output", generatePermutations(textinput));
+            document.getElementById("input").innerText = localStorage.getItem("input");
+            document.getElementById("output").innerText = localStorage.getItem("output");
+        }
+    </script>
+</body>
+</html>
