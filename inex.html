@@ -30,7 +30,7 @@
             padding-left: 10px;
         }
     </style>
-    <script src="./Week 2/generatePermutations.js"></script>
+    <script src="./Week 3/familyTree.js"></script>
 </head>
 
 <body>
@@ -51,7 +51,7 @@
         function myFunction() {
             textinput = document.getElementById("multiline").value;
             localStorage.setItem("input", textinput);
-            localStorage.setItem("output", generatePermutations(textinput));
+            localStorage.setItem("output", family(textinput));
             document.getElementById("input").innerText = localStorage.getItem("input");
             document.getElementById("output").innerText = localStorage.getItem("output");
         }

@@ -21,7 +21,11 @@ function generatePermutations(n) {
     nums.push(i);
   }
   permute(nums, 0, n - 1, result);
-  return result.join(" ");
+  let answ = [];
+  for (let i = 0; i < result.length; i++) {
+    answ.push(result[i].join(' '));
+  }
+  return answ.join("\n");
 }
 
 function permute(nums, l, r, result) {
