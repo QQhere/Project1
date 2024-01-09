@@ -15,18 +15,21 @@ Output
 10
 */
 function computeC_k_n(input) {
-    let [k, n] = input.split(" ").map(Number);
-    
-    let C = new Array(k+1).fill().map(() => new Array(n+1).fill(0));
-    for (let i = 0; i <= k; i++) {
-      for (let j = 0; j <= n; j++) {
-        if (i == 0 || i == j) {
-          C[i][j] = 1;
-        } else {
-          C[i][j] = C[i - 1][j - 1] + C[i][j-1];
+    let [k, n] = input.trim().split(" ").map(Number);
+    let MOD = 1e9 + 7;
+    let C = Array.from(Array(n+1), () => new Array(k+1).fill(0));
+    for (let i = 0; i <= n; i++) {
+        for (let j = 0; j <= Math.min(i, k); j++) {
+            if (j == 0 || j == i) {
+                C[i][j] = 1;
+            } else {
+                C[i][j] = (C[i-1][j-1] + C[i-1][j]) % MOD;
+            }
         }
-      }
     }
-    return C[k][n]%(1000000007);
-  }
-  
+
+    return C[n][k];
+}
+
+const input = `500 999`
+console.log(computeC_k_n(input)); 

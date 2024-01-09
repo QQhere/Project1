@@ -33,87 +33,75 @@ Input
 Output
 17
 */
-function maxFlow(n, m, s, t, edges) {
-    const INF = 1e9;
-    const adj = Array.from({ length: n + 1 }, () => []);
-    const level = Array.from({ length: n + 1 }, () => 0);
-    const iter = Array.from({ length: n + 1 }, () => 0);
-  
-    for (let i = 0; i < m; i++) {
-      const [u, v, c] = edges[i];
-      adj[u].push([v, c, adj[v].length]);
-      adj[v].push([u, 0, adj[u].length - 1]);
-    }
-  
-    function bfs() {
-      level.fill(0);
-      const q = [s];
-      level[s] = 1;
-      while (q.length) {
-        const u = q.shift();
-        for (const [v, c] of adj[u]) {
-          if (c > 0 && !level[v]) {
-            level[v] = level[u] + 1;
-            q.push(v);
-          }
-        }
-      }
-      return level[t] > 0;
-    }
-  
-    function dfs(u, flow) {
-        if (u === t) return flow;
-        for (let i = iter[u]; i < adj[u].length; i++) {
-          const [v, c, r] = adj[u][i];
-          if (c > 0 && level[v] === level[u] + 1) {
-            const f = dfs(v, Math.min(flow, c));
-            if (f > 0) {
-              adj[u][i][1] -= f;
-              adj[v][r][1] += f;
-              return f;
-            }
-          }
-        }
-        return 0;
-      }
-  
-    let ans = 0;
-    while (bfs()) {
-      iter.fill(0);
-      let f;
-      while ((f = dfs(s, INF))) {
-        ans += f;
-      }
-    }
-    return ans;
+function maxFlow(input) {
+  let lines = input.trim().split('\n');
+  let [N, M] = lines[0].split(' ').map(Number);
+  let [s, t] = lines[1].split(' ').map(Number);
+  let capacity = Array.from({length: N}, () => Array(N).fill(0));
+  for (let i = 2; i < M + 2; i++) {
+      let [u, v, c] = lines[i].split(' ').map(Number);
+      capacity[u - 1][v - 1] = c;
   }
-  
-  const input = `7 12
-  6 7
-  1 7 7
-  2 3 6
-  2 5 6
-  3 1 6
-  3 7 11
-  4 1 7
-  4 2 4
-  4 5 5
-  5 1 4
-  5 3 4
-  6 2 8
-  6 4 10`;
-  function re(input) {
-    const lines = input.split("\n");
-    let inputArray = input.split('\n');
-    let nm = inputArray[0].split(' ').map(Number);
-    let n = nm[0];
-    let m = nm[1];
-    let st= inputArray[1].split(' ').map(Number);
-    let s = st[0];
-    let t = st[0];
-    const edges = lines.slice(2).map(line => line.split(' ').map(Number));
-    const ans = maxFlow(n, m, s, t, edges);
-    return ans;
+  let residual = capacity.map(row => row.slice());
+  let n = residual.length;
+  let maxFlow = 0;
+  let path = bfs(residual, s - 1, t - 1);
+  while (path != null) {
+      let flow = Infinity;
+      for (let i = 0; i < path.length - 1; i++) {
+          let u = path[i], v = path[i + 1];
+          flow = Math.min(flow, residual[u][v]);
+      }
+      maxFlow += flow;
+      for (let i = 0; i < path.length - 1; i++) {
+          let u = path[i], v = path[i + 1];
+          residual[u][v] -= flow;
+          residual[v][u] += flow;
+      }
+      path = bfs(residual, s - 1, t - 1);
+  }
+  return maxFlow;
 }
 
-  
+function bfs(residual, source, sink) {
+  let n = residual.length;
+  let pred = Array(n).fill(-1);
+  let queue = [source];
+  pred[source] = source;
+  while (queue.length > 0) {
+      let u = queue.shift();
+      for (let v = 0; v < n; v++) {
+          if (pred[v] == -1 && residual[u][v] > 0) {
+              pred[v] = u;
+              if (v == sink) return getPath(pred, source, sink);
+              queue.push(v);
+          }
+      }
+  }
+  return null;
+}
+
+function getPath(pred, source, sink) {
+  let path = [sink];
+  while (path[path.length - 1] != source) {
+      path.push(pred[path[path.length - 1]]);
+  }
+  return path.reverse();
+}
+
+
+let input = `7 12
+6 7
+1 7 7
+2 3 6
+2 5 6
+3 1 6
+3 7 11
+4 1 7
+4 2 4
+4 5 5
+5 1 4
+5 3 4
+6 2 8
+6 4 10`;
+console.log(maxFlow(input)); 

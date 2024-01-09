@@ -26,41 +26,63 @@ Output
 1 2 3 4 5 6
 */
 function BFS(input) {
-    let inputArray = input.split('\n');
-    let nm = inputArray[0].split(' ').map(Number);
-    let n = nm[0];
-    let m = nm[1];
-    let edges = [];
-    for (let i = 1; i <= m; i++) {
-        let sub = inputArray[i].split(' ').map(Number);
-        edges.push(sub);
-    }
-    let graph = new Map();
-    for (let i = 1; i <= n; i++) {
-        graph.set(i, []);
-    }
-    for (let i = 0; i < m; i++) {
-        let [u, v] = edges[i];
-        graph.get(u).push(v);
-        graph.get(v).push(u);
-    }
-    for (let [key, value] of graph) {
-        value.sort((a, b) => a - b);
-    }
-    let visited = new Set();
-    let result = [];
-    let queue = [];
-    queue.push(1);
-    visited.add(1);
-    while (queue.length > 0) {
-        let node = queue.shift();
-        result.push(node);
-        for (let neighbor of graph.get(node)) {
-            if (!visited.has(neighbor)) {
-                visited.add(neighbor);
-                queue.push(neighbor);
+    var graph = inputToGraph(input);
+    var visited = [];
+    var queue = [1];
+
+    while(queue.length > 0) {
+        var node = queue.shift(); 
+        if(!visited.includes(node)) {
+            visited.push(node);
+            var neighbours = graph[node]; 
+            neighbours.sort((a, b) => a - b);
+            queue.push(...neighbours);
+        }
+
+        if(queue.length === 0) {
+            for(var i = 1; i <= Object.keys(graph).length; i++) {
+                if(!visited.includes(i)) {
+                    queue.push(i);
+                    break;
+                }
             }
         }
     }
-    return result.join(" ");
+    return visited.join(" ");
 }
+
+function inputToGraph(input) {
+    var lines = input.split('\n');
+    var graph = {};
+    for(var i = 1; i < lines.length; i++) {
+        var [u, v] = lines[i].split(' ').map(Number);
+        if(!graph[u]) {
+            graph[u] = [];
+        }
+        if(!graph[v]) {
+            graph[v] = [];
+        }
+        graph[u].push(v);
+        graph[v].push(u);
+    }
+    return graph;
+}
+
+const input = `16 16
+2 4
+1 3
+3 4
+5 6
+1 2
+3 5
+2 3
+7 2
+6 9
+9 10
+4 10
+5 11
+8 12
+12 14
+13 15
+13 16`;
+console.log(BFS(input));

@@ -47,3 +47,10 @@ function hashOverStrings(input) {
     }
     return arr.join('\n');
 }
+const input = `5 10
+hq
+h
+meayl
+l
+dxf`;
+console.log(hashOverStrings(input));

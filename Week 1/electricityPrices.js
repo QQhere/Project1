@@ -33,7 +33,8 @@ OUTPUT
 -1276.00
 */
 
-function electricityPrices(kwh) {
+function electricityPrices(input) {
+    let kwh = parseInt(input);
     if (kwh < 0) return null;
     let current_cost = 0;
     const current_price = [1728, 1786, 2074, 2612, 2919, 3015];

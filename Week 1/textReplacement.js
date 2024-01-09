@@ -23,3 +23,8 @@ function textReplacement(input) {
     let t = arrayInput[2];
     return t.replace(new RegExp(p1, 'g'), p2);
 }
+
+const input = `DS
+Data Science
+DS is a very new field in technology.`;
+console.log(textReplacement(input));

@@ -43,3 +43,6 @@ function solveQuadraticEquation(input) {
         return x1 + " " + x2;
     }
 }
+const input = `1 -6 9
+`;
+console.log(solveQuadraticEquation(input));

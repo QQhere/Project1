@@ -21,7 +21,8 @@ Output
 111
 
 */
-function binarySequences(n) {
+function binarySequences(input) {
+  let n = parseInt(input);
   let result = [];
   for (let i = 0; i < Math.pow(2, n); i++) {
     let binary = i.toString(2);

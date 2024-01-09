@@ -114,3 +114,21 @@ function treeManipulation(input) {
   }
   return answer.join('\n');
 }
+
+const input = `MakeRoot 10
+Insert 11 10
+Insert 1 10
+Insert 3 10
+InOrder
+Insert 5 11
+Insert 4 11
+Insert 8 3
+PreOrder
+Insert 2 3
+Insert 7 3
+Insert 6 4
+Insert 9 4
+InOrder 
+PostOrder
+*`;
+console.log(treeManipulation(input));

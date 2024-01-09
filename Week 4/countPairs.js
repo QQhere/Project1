@@ -16,10 +16,8 @@ Kết quả
 2
 */
 function countPairs(input) {
-    let inputArray = input.split('\n');
-    let nM = inputArray[0].split(' ').map(Number);
-    let n = 5;
-    let M = nM[1];
+    let inputArray = input.trim().split('\n');
+    let [n, M] = inputArray[0].split(' ').map(Number);
     let arr = inputArray[1].split(' ').map(Number);
     let count = 0;
     let map = new Map();
@@ -35,6 +33,7 @@ function countPairs(input) {
     }
     return count;
 }
+
 const input = `5 6
 5 2 1 4 3`
 console.log(countPairs(input))

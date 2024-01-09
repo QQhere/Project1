@@ -16,7 +16,8 @@ Output
 3 9
 */
 
-function listNumbersAndSquares(n) {
+function listNumbersAndSquares(input) {
+    let n = parseInt(input);
     const arr = [];
     for (let i = 1; i <= n; i++) {
         arr[i-1] = `${i} ${i*i}`;

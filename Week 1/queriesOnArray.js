@@ -37,39 +37,29 @@ Output
 
 */
 
-function findMax(arr) {
-    return Math.max(...arr);
-}
-
-function findMin(arr) {
-    return Math.min(...arr);
-}
-
-function sum(arr) {
-    return arr.reduce((a, b) => a + b, 0);
-}
-
-function findMaxSegment(arr, i, j) {
-    return Math.max(...arr.slice(i, j + 1));
-}
-
 function queriesOnArray(input) {
     let inputArray = input.split("\n");
     let n = parseInt(inputArray[0]);
     let arr = inputArray[1].split(" ").map(Number);
     let queries = inputArray.slice(3, inputArray.length - 1);
     let answer = [];
-    for (let i = 0; i < queries.length; i++) {
-        let query = queries[i];
-        if (query === "find-max") {
-            answer.push(findMax(arr));
-        } else if (query === "find-min") {
-            answer.push(findMin(arr));
-        } else if (query === "sum") {
-            answer.push(sum(arr));
-        } else if (query.startsWith("find-max-segment")) {
-            let [_, i, j] = query.split(" ");
-            answer.push(findMaxSegment(arr, parseInt(i), parseInt(j)));
+    for (let query of queries) {
+        let parts = query.split(' ');
+        switch (parts[0]) {
+            case 'find-max':
+                answer.push(Math.max(...arr));
+                break;
+            case 'find-min':
+                answer.push(Math.min(...arr));
+                break;
+            case 'sum':
+                answer.push(arr.reduce((a, b) => a + b, 0));
+                break;
+            case 'find-max-segment':
+                let i = parseInt(parts[1]) - 1;
+                let j = parseInt(parts[2]);
+                answer.push(Math.max(...arr.slice(i, j)));
+                break;
         }
     }
     return answer.join('\n');

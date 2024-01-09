@@ -1,4 +1,4 @@
-function processBankTransaction(input) {
+function processBankTransactions(input) {
     const data = input.split('\n');
     const transactions = [];
     let i = 0;
