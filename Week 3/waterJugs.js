@@ -18,28 +18,51 @@ function waterJugs(input) {
   let a = inputArray[0];
   let b = inputArray[1];
   let c = inputArray[2];
-  if (c > Math.max(a, b)) {
+  if (a > b) {
+    let temp = a;
+    a = b;
+    b = temp;
+}
+
+if (c > b)
     return -1;
+
+if ((c % gcd(b, a)) !== 0)
+    return -1;
+
+return Math.min(pour(b, a, c), pour(a, b, c));
+}
+
+function gcd(a, b) {
+  if (b === 0)
+      return a;
+  return gcd(b, a % b);
+}
+
+function pour(fromJug, toJug, target) {
+  let from = fromJug;
+  let to = 0;
+  let step = 1;
+
+  while (from !== target && to !== target) {
+      let temp = Math.min(from, toJug - to);
+
+      to += temp;
+      from -= temp;
+      step++;
+
+      if (from === target || to === target)
+          break;
+
+      if (from === 0) {
+          from = fromJug;
+          step++;
+      }
+
+      if (to === toJug) {
+          to = 0;
+          step++;
+      }
   }
-
-  let steps = 0;
-  let x = 0;
-  let y = 0;
-
-  while (x !== c && y !== c) {
-    if (x === 0) {
-      x = a;
-      steps++;
-    } else if (y === b) {
-      y = 0;
-      steps++;
-    } else {
-      const diff = Math.min(x, b - y);
-      x -= diff;
-      y += diff;
-      steps++;
-    }
-  }
-
-  return steps;
+  return step;
 }

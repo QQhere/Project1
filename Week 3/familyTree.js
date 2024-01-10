@@ -66,22 +66,7 @@ function FamilyTree() {
 }
 
 let familyTree = new FamilyTree();
-let input = `Peter Newman
-Michael Thomas
-John David
-Paul Mark
-Stephan Mark
-Pierre Thomas
-Mark Newman
-Bill David
-David Newman
-Thomas Mark
-***
-descendants Newman
-descendants Mark
-descendants David
-generation Mark
-***`;
+
 function family(input) {
     let answer = [];
     let lines = input.split("\n");
@@ -103,3 +88,21 @@ function family(input) {
     }
     return answer.join("\n");
 }
+
+let input = `Peter Newman
+Michael Thomas
+John David
+Paul Mark
+Stephan Mark
+Pierre Thomas
+Mark Newman
+Bill David
+David Newman
+Thomas Mark
+***
+descendants Newman
+descendants Mark
+descendants David
+generation Mark
+***`;
+console.log(family(input));

@@ -39,3 +39,5 @@ function checkParenthesis(input) {
 
   return stack.length === 0 ? 1 : 0;
 }
+const input = '(()[][]{}){}{}[][]({[]()})';
+console.log(checkParenthesis(input));

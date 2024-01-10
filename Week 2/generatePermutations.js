@@ -14,7 +14,8 @@ Output
 3 2 1 
 
 */
-function generatePermutations(n) {
+function generatePermutations(input) {
+  let n = parseInt(input);
   let result = [];
   let nums = [];
   for (let i = 1; i <= n; i++) {
@@ -45,3 +46,5 @@ function swap(nums, i, j) {
   nums[i] = nums[j];
   nums[j] = temp;
 }
+
+console.log(generatePermutations(5));

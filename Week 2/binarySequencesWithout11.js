@@ -16,7 +16,8 @@ Output
 100
 101
 */
-function binarySequencesWithout11(n) {
+function binarySequencesWithout11(input) {
+  let n = parseInt(input);
   let result = [];
   for (let i = 0; i < Math.pow(2, n); i++) {
     let binary = i.toString(2);
@@ -29,3 +30,5 @@ function binarySequencesWithout11(n) {
   }
   return result.join("\n");
 }
+
+console.log(binarySequencesWithout11(5))

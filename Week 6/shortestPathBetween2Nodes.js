@@ -55,3 +55,13 @@ function shortestPathBetween2Nodes(input) {
   const [s, t] = lines[m + 1].split(' ').map(Number);
   return shortestPath(n, m, edges, s, t);
 }
+const input = `5 7
+2 5 87
+1 2 97
+4 5 78
+3 1 72
+1 4 19
+2 3 63
+5 1 18
+1 5`;
+console.log(shortestPathBetween2Nodes(input));

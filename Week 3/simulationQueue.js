@@ -54,6 +54,8 @@ function simulationQueue(input) {
             } else {
                 output.push(value);
             }
+        } else {
+            break;
         }
     }
     return output.join("\n");

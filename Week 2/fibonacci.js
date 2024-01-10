@@ -13,13 +13,15 @@ Input
 Output
 21
 */
-function fibonacci(n) {
-  n = parseInt(n);
-  if (n === 1) {
-    return 0;
-  } else if (n === 2) {
-    return 1;
-  } else {
-    return fibonacci(n - 1) + fibonacci(n - 2);
-  }
+function fibonacci(input) {
+  n = parseInt(input);
+    let a = 0;
+    let b = 1;
+    for (let i = 2; i <= n; i++) {
+        let c = a + b;
+        a = b;
+        b = c;
+    }
+    return a;
 }
+console.log(fibonacci(16))

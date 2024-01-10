@@ -159,7 +159,6 @@ function linkedListManipulation(input) {
   for (let value of arr) {
     addLast(head, value);
   }
-  console.log(inputArray)
   for (let i = 2; inputArray[i] !== '#'; i++) {
     let sub = inputArray[i].split(' ');
     if (sub[0] === 'addlast') {
@@ -178,7 +177,7 @@ function linkedListManipulation(input) {
       remove(head, parseInt(sub[1]));
     } else if (sub[0] == 'reverse') {
       head = reverse(head);
-    } console.log(1)
+    }
   }
   return printList(head.next);
 }
