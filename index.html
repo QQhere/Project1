@@ -14,11 +14,11 @@
         <h1>Báo cáo Project I - 733501</h1>
         <h2>Phạm Như Quỳnh - 20215468</h2>
     </div>
-    
+
     <div class="content">
         <label for="week">Chọn tuần:</label>
         <select id="week"></select>
-    
+
         <label for="lesson">Chọn bài:</label>
         <select id="lesson"></select>
         <div class="problem" id="problem">Đề bài sẽ được hiển thị ở đây</div>
@@ -31,131 +31,171 @@
                 <pre class="output" id="output">Output sẽ được hiển thị ở đây</pre>
             </div>
         </div>
-    
-        <form action="project1.php" method="post" onsubmit="myFunction(event)">
+
+        <form action="project1.php" method="post">
             <div class="submit_container">
                 <input type="submit" value="Submit" name="submit" />
             </div>
         </form>
     </div>
     <script>
-        var variables;
+        var variables = sumArray;
+
         fetch('data.json')
-    .then(response => response.json())
-    .then(data => {
-        var weekSelect = document.getElementById('week');
-        var lessonSelect = document.getElementById('lesson');
-        var content = document.getElementById('content');
-        var problem = document.getElementById('problem');
+            .then(response => response.json())
+            .then(data => {
+                var weekSelect = document.getElementById('week');
+                var lessonSelect = document.getElementById('lesson');
+                var content = document.getElementById('content');
+                var problem = document.getElementById('problem');
 
-        // Thêm các tuần vào nút dropdown 'week'
-        for (var week in data) {
-            var option = document.createElement('option');
-            option.textContent = week;
-            weekSelect.appendChild(option);
-        }
-        
-        // Khi tuần được chọn, thêm các bài vào nút dropdown 'lesson'
-        weekSelect.addEventListener('change', function () {
-
-            // Xóa các bài hiện tại
-            lessonSelect.innerHTML = '';
-
-            // Thêm các bài mới
-            for (var lesson in data[this.value]) {
-                var option = document.createElement('option');
-                option.textContent = lesson;
-                lessonSelect.appendChild(option);
-            }
-
-            // Hiển thị mã nguồn cho bài đầu tiên
-            content.textContent = data[this.value][lessonSelect.value].Code;
-            problem.textContent = data[this.value][lessonSelect.value].Problem;
-        });
-
-            // Khi bài được chọn, hiển thị mã nguồn
-            lessonSelect.addEventListener('change', function () {
-            content.textContent = data[weekSelect.value][this.value].Code;
-            problem.textContent = data[weekSelect.value][this.value].Problem;
-            
-            switch (weekSelect.value) {
-                case "Tuần 1": {
-                    switch (this.value) {
-                        case "Bai1": variables = sumArray; break;
-                        case "Bai2": variables = listSequencOfInteger; break;
-                        case "Bai3": variables = electricityPrices; break;
-                        case "Bai4": variables = upperCase; break;
-                        case "Bai5": variables = extractYearMonthDay; break;
-                        case "Bai6": variables = listNumbersAndSquares; break;
-                        case "Bai7": variables = countOddAndEven; break;
-                        case "Bai8": variables = addSubtractMultiplicationDivision; break;
-                        case "Bai9": variables = convertToSeconds; break;
-                        case "Bai10": variables = solveQuadraticEquation; break;
-                        case "Bai11": variables = queriesOnArray; break;
-                        case "Bai12": variables = kSubsequenceEven; break;
-                        case "Bai13": variables = countWords; break;
-                        case "Bai14": variables = textReplacement; break;
-                    }
+                // Thêm các tuần vào nút dropdown 'week'
+                for (var week in data) {
+                    var option = document.createElement('option');
+                    option.textContent = week;
+                    weekSelect.appendChild(option);
                 }
-                case "Tuần 2": {
-                    switch (this.value) {
-                        case "Bai1": variables = fibonacci; break;
-                        case "Bai2": variables = computeC_k_n; break;
-                        case "Bai3": variables = binarySequences; break;
-                        case "Bai4": variables = binarySequencesWithout11; break;
-                        case "Bai5": variables = generatePermutations; break;
-                        case "Bai6": variables = countSolutions; break;
-                    }
-                }
-                case "Tuần 3": {
-                    switch (this.value) {
-                        case "Bai1": variables = simulateStack; break;
-                        case "Bai2": variables = simulationQueue; break;
-                        case "Bai3": variables = checkParenthesis; break;
-                        case "Bai4": variables = waterJugs; break;
-                        case "Bai5": variables = treeManipulation; break;
-                        case "Bai6": variables = family; break;
-                        case "Bai7": variables = preOrder; break;
-                        case "Bai8": variables = linkedListManipulation; break;
-                    }
-                }
-                default: variables = 10;
-            }
-        });
 
-        // Kích hoạt sự kiện 'change' cho nút dropdown 'week' để hiển thị các bài cho tuần đầu tiên
-        weekSelect.dispatchEvent(new Event('change'));
-    });
+                // Khi tuần được chọn, thêm các bài vào nút dropdown 'lesson'
+                weekSelect.addEventListener('change', function () {
 
-    function myFunction(event) {
+                    // Xóa các bài hiện tại
+                    lessonSelect.innerHTML = '';
+
+                    // Thêm các bài mới
+                    for (var lesson in data[this.value]) {
+                        var option = document.createElement('option');
+                        option.textContent = lesson;
+                        lessonSelect.appendChild(option);
+                    }
+
+                    // Hiển thị mã nguồn cho bài đầu tiên
+                    content.textContent = data[this.value][lessonSelect.value].Code;
+                    problem.textContent = data[this.value][lessonSelect.value].Problem;
+
+                    switch (weekSelect.value) {
+                        case "Tuần 1": variables = sumArray; break;
+                        case "Tuần 2": variables = fibonacci; break;
+                        case "Tuần 3": variables = simulateStack; break;
+                        case "Tuần 4": variables = storeSearchString; break;
+                        case "Tuần 5": variables = kruskal; break;
+                        case "Tuần 6": variables = maxFlow; break;
+                        case "Tuần 7": variables = processBankTransactions; break;
+                        case "Tuần 8": variables = programmingContest; break;
+                    }
+                });
+
+                // Khi bài được chọn, hiển thị mã nguồn
+                lessonSelect.addEventListener('change', function () {
+                    content.textContent = data[weekSelect.value][this.value].Code;
+                    problem.textContent = data[weekSelect.value][this.value].Problem;
+
+                    console.log(weekSelect.value)
+                    console.log(this.value)
+                    switch (weekSelect.value) {
+                        case "Tuần 1": {
+                            switch (this.value) {
+                                case "Bai1": variables = sumArray; break;
+                                case "Bai2": variables = listSequencOfInteger; break;
+                                case "Bai3": variables = electricityPrices; break;
+                                case "Bai4": variables = upperCase; break;
+                                case "Bai5": variables = extractYearMonthDay; break;
+                                case "Bai6": variables = listNumbersAndSquares; break;
+                                case "Bai7": variables = countOddAndEven; break;
+                                case "Bai8": variables = addSubtractMultiplicationDivision; break;
+                                case "Bai9": variables = convertToSeconds; break;
+                                case "Bai10": variables = solveQuadraticEquation; break;
+                                case "Bai11": variables = queriesOnArray; break;
+                                case "Bai12": variables = kSubsequenceEven; break;
+                                case "Bai13": variables = countWords; break;
+                                case "Bai14": variables = textReplacement; break;
+                            }
+                            break;
+                        }
+                        case "Tuần 2": {
+                            switch (this.value) {
+                                case "Bai1": variables = fibonacci; break;
+                                case "Bai2": variables = computeC_k_n; break;
+                                case "Bai3": variables = binarySequences; break;
+                                case "Bai4": variables = binarySequencesWithout11; break;
+                                case "Bai5": variables = generatePermutations; break;
+                                case "Bai6": variables = countSolutions; break;
+                            }
+                            break;
+                        }
+                        case "Tuần 3": {
+                            switch (this.value) {
+                                case "Bai1": variables = simulateStack; break;
+                                case "Bai2": variables = simulationQueue; break;
+                                case "Bai3": variables = checkParenthesis; break;
+                                case "Bai4": variables = waterJugs; break;
+                                case "Bai5": variables = treeManipulation; break;
+                                case "Bai6": variables = family; break;
+                                case "Bai7": variables = preOrder; break;
+                                case "Bai8": variables = linkedListManipulation; break;
+                            }
+                            break;
+                        }
+                        case "Tuần 4": {
+                            switch (this.value) {
+                                case "Bai1": variables = storeSearchString; break;
+                                case "Bai2": variables = hashOverStrings; break;
+                                case "Bai3": variables = checkAppears; break;
+                                case "Bai4": variables = countPairs; break;
+                            }
+                            break;
+                        }
+                        case "Tuần 5": {
+                            switch (this.value) {
+                                case "Bai1": variables = kruskal; break;
+                                case "Bai2": variables = DFS; break;
+                                case "Bai3": variables = BFS; break;
+                                case "Bai4": variables = hamiltonian; break;
+                            }
+                            break;
+                        }
+                        case "Tuần 6": {
+                            switch (this.value) {
+                                case "Bai1": variables = maxFlow; break;
+                                case "Bai2": variables = shortestPathBetween2Nodes; break;
+                                case "Bai3": variables = allPairShortestPaths; break;
+                            }
+                            break;
+                        }
+                        case "Tuần 7": {
+                            switch (this.value) {
+                                case "Bai1": variables = processBankTransactions; break;
+                                case "Bai2": variables = analyzeSalesOrder; break;
+                            }
+                            break;
+                        }
+                        case "Tuần 8": {
+                            switch (this.value) {
+                                case "Bai1": variables = programmingContest; break;
+                                case "Bai2": variables = processCitizenData; break;
+                            }
+                            break;
+                        }
+                    }
+
+                });
+
+                // Kích hoạt sự kiện 'change' cho nút dropdown 'week' để hiển thị các bài cho tuần đầu tiên
+                weekSelect.dispatchEvent(new Event('change'));
+            });
+
+        document.querySelector('form').addEventListener('submit', function myFunction(event) {
             event.preventDefault();
             let textinput = document.getElementById("input").value;
             var jsCode = document.getElementById('content').textContent;
-    
-            fetch('http://localhost:3000/run-js-code', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ jsCode: jsCode }),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .catch(e => {
-                    console.error('There was a problem with the fetch operation: ' + e.message);
-                });
-
-            document.getElementById("output").innerText = sumArray(textinput);
+            document.getElementById("output").innerText = variables(textinput);
             textinput = null;
-        }
+        });
     </script>
-        
+
     <script>
-        
+
     </script>
 </body>
+
 </html>
